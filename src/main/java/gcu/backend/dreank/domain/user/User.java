@@ -12,6 +12,7 @@ public class User {
 
 //    null 여부, column 이름 - 동일한 경우 생략, 길이
 //    null이 가능하고, column명과 변수명 동일하다면 @Column 불필요
+
     @Column(nullable = false)
     private String name;
 
@@ -25,7 +26,12 @@ public class User {
 
     private String email;
 
+//    수정- 년월까지만,,,
     private String birth;
-    
+
+//    created_at 필요?
+//    activated??
+
     private String introduce;
+
 }

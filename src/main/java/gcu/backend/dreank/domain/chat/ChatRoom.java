@@ -14,10 +14,6 @@ public class ChatRoom {
     @Column(name = "room_id")
     private Long id;
 
-//    참여자 정보
-    @OneToMany
-    private List<User> users;
-
 //    @OneToOne
     @JoinColumn(name = "study_id")
     private Long study_id;

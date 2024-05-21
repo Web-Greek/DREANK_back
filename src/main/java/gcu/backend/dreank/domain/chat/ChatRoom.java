@@ -1,19 +1,26 @@
 package gcu.backend.dreank.domain.chat;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import gcu.backend.dreank.domain.user.User;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
 public class ChatRoom {
+//    채팅방 id
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "room_id")
     private Long id;
 
-
 //    참여자 정보
+    @OneToMany
+    private List<User> users;
 
+//    @OneToOne
+    @JoinColumn(name = "study_id")
+    private Long study_id;
 
+    private String title;
 }

@@ -1,13 +1,24 @@
 package gcu.backend.dreank.domain.study;
 
 import gcu.backend.dreank.domain.common.BaseEntity;
+import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
-import gcu.backend.dreank.domain.study.enums.Verify;
 import gcu.backend.dreank.domain.user.User;
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.format.annotation.DateTimeFormat;
 
-public class JoinStudy extends BaseEntity {
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+public class Post extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,13 +28,13 @@ public class JoinStudy extends BaseEntity {
     @JoinColumn(name = "user_id") //외래키는 user_id
     private User user; //user 객체
 
-    //  user를 참조하는 N:1관계
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "study_id") //외래키는 leader_id
-    private Study study;
+    @Column(nullable = false, length = 20)
+    private String title;
+
+    @Column(nullable = false, length = 255)
+    private String content;
 
     @Column(nullable = false)
-    @ColumnDefault("REJECT")
-    @Enumerated(EnumType.STRING)
-    private Verify verify;
+    @ColumnDefault("0")
+    private int view;
 }

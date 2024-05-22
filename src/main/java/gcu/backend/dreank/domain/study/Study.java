@@ -1,22 +1,24 @@
 package gcu.backend.dreank.domain.study;
 
 import gcu.backend.dreank.domain.common.BaseEntity;
+import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
-import gcu.backend.dreank.domain.study.enums.Tag;
 import gcu.backend.dreank.domain.user.User;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DialectOverride;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Study extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +40,7 @@ public class Study extends BaseEntity {
 
 //    요일,,,enum-list?????????????????????????????
 //    주 2일인 경우
-    @Column(nullable = false)
+    @Column(nullable = false, length = 20)
     @Enumerated(EnumType.STRING)
     private Day day;
 
@@ -48,8 +50,8 @@ public class Study extends BaseEntity {
     private int score;
 
     //     모집중/모집완료/
-    @Column(nullable = false)
-    @ColumnDefault("RECRUIT")
+    @Column(nullable = false, length = 20)
+    @ColumnDefault("'RECRUIT'")
     @Enumerated(EnumType.STRING)
     private StudyStatus status;
 
@@ -57,8 +59,8 @@ public class Study extends BaseEntity {
     //@OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     //private List<Tag> tagList = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    //private List<Part> partList = new ArrayList<>();
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    private List<UserStudy> partList = new ArrayList<>();
 
     //@OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     //private List<ChatRoom> chatRoomList = new ArrayList<>();

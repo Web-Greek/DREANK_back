@@ -1,10 +1,15 @@
 package gcu.backend.dreank.domain.user;
 
 import gcu.backend.dreank.domain.common.BaseEntity;
+import gcu.backend.dreank.domain.mapping.UserStudy;
+import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.user.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -48,14 +53,14 @@ public class User extends BaseEntity {
     private String introduce;
 
     //여기 아래부터, 각 class 생성 후에 import 해야 함
-    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    //private List<Part> partList = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserStudy> userStudyList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Study> studyList = new ArrayList<>();
 
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    //private List<Study> studyList = new ArrayList<>();
-
-    //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    //private List<ChatRoom> chatRoomList = new ArrayList<>();
+    //private List<UserChat> userChatList = new ArrayList<>();
 
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     //private List<Post> postList = new ArrayList<>();

@@ -1,6 +1,7 @@
 package gcu.backend.dreank.domain.study;
 
 import gcu.backend.dreank.domain.common.BaseEntity;
+import gcu.backend.dreank.domain.mapping.ChatRoom;
 import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
@@ -56,12 +57,12 @@ public class Study extends BaseEntity {
     private StudyStatus status;
 
     //여기 아래부터, 각 class 생성 후에 import 해야 함
-    //@OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    //private List<Tag> tagList = new ArrayList<>();
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    private List<Tag> tagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<UserStudy> partList = new ArrayList<>();
 
-    //@OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    //private List<ChatRoom> chatRoomList = new ArrayList<>();
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    private List<ChatRoom> chatRoomList = new ArrayList<>();
 }

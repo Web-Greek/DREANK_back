@@ -1,5 +1,6 @@
-package gcu.backend.dreank.domain.user;
+package gcu.backend.dreank.repository;
 
+import gcu.backend.dreank.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -6,6 +6,7 @@ import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.user.User;
+import gcu.backend.dreank.dto.request.StudyCreateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -24,6 +25,15 @@ public class Study extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false, length = 20)
+    private String name;
+
+    @Column(nullable = false, length = 100)
+    private String introduction;
+
+    @Column(nullable = false)
+    private int num_recruit;
 
 //  user를 참조하는 N:1관계
     @ManyToOne(fetch = FetchType.LAZY)

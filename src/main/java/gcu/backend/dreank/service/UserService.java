@@ -1,7 +1,7 @@
 package gcu.backend.dreank.service;
 
 import gcu.backend.dreank.domain.user.User;
-import gcu.backend.dreank.domain.user.UserRepository;
+import gcu.backend.dreank.repository.UserRepository;
 import gcu.backend.dreank.dto.request.UserCreateRequest;
 import lombok.RequiredArgsConstructor;
 

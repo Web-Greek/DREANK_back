@@ -1,11 +1,12 @@
-package gcu.backend.dreank.service;
+package gcu.backend.dreank.service.user;
 
 import gcu.backend.dreank.domain.user.User;
 import gcu.backend.dreank.domain.user.UserRepository;
 import gcu.backend.dreank.dto.request.UserCreateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;

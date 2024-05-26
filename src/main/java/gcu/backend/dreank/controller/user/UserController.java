@@ -3,16 +3,16 @@ package gcu.backend.dreank.controller.user;
 import gcu.backend.dreank.service.user.UserService;
 import gcu.backend.dreank.dto.request.UserCreateRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-//@RestController
-@RequestMapping("/user")
+@RestController
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
 
 //    CREATE- 회원가입
-    @PostMapping
+    @PostMapping("/user")
     public void saveUser(@RequestBody UserCreateRequest request){
         userService.saveUser(request);
     }
@@ -25,7 +25,7 @@ public class UserController {
 
 //    DELETE
 //    탈퇴하기
-    @DeleteMapping
+    @DeleteMapping("/user")
     public void deleteUser(@RequestParam String nickname){
 
     }

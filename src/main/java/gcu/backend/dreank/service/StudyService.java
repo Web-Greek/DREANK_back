@@ -58,7 +58,7 @@ public class StudyService {
     }
 
     public List<StudyResponse> findThreeRank() {
-        List<Study> studyList = studyRepository.findTop3ByOrderByPointDesc();
+        List<Study> studyList = studyRepository.findTop3ByOrderByScoreDesc();
         List<StudyResponse> studyResponseList = new ArrayList<>();
 
         if(studyList.isEmpty()) {

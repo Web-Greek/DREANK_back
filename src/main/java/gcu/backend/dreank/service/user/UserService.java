@@ -1,7 +1,7 @@
 package gcu.backend.dreank.service.user;
 
 import gcu.backend.dreank.domain.user.User;
-import gcu.backend.dreank.domain.user.UserRepository;
+import gcu.backend.dreank.repository.UserRepository;
 import gcu.backend.dreank.dto.request.user.UserCreateRequest;
 import gcu.backend.dreank.dto.request.user.UserUpdateRequest;
 import jakarta.transaction.Transactional;

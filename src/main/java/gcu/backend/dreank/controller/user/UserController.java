@@ -1,8 +1,7 @@
 package gcu.backend.dreank.controller.user;
 
-import gcu.backend.dreank.service.UserService;
 import gcu.backend.dreank.dto.request.user.UserCreateRequest;
-import gcu.backend.dreank.dto.request.user.UserUpdateRequest;
+import gcu.backend.dreank.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

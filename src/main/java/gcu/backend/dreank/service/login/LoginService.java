@@ -3,7 +3,7 @@ package gcu.backend.dreank.service.login;
 import gcu.backend.dreank.dto.request.login.SessionConst;
 import gcu.backend.dreank.dto.request.login.SessionInfo;
 import gcu.backend.dreank.domain.user.User;
-import gcu.backend.dreank.domain.user.UserRepository;
+import gcu.backend.dreank.repository.UserRepository;
 import gcu.backend.dreank.dto.request.login.LoginForm;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

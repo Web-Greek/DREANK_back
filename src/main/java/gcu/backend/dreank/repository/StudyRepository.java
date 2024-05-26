@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface StudyRepository extends JpaRepository<Study, Long> {
     List<Study> findByName(String name);
-    List<Study> findTop3ByOrderByPointDesc();
+    List<Study> findTop3ByOrderByScoreDesc();
     List<Study> findByStatus(StudyStatus status);
 }

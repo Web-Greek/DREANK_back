@@ -20,4 +20,9 @@ public class UserService {
 //    UPDATE
 
 //    DELETE
+    public void deleteUser(String nickname){
+        User user = userRepository.findByNickname(nickname)
+                .orElseThrow(IllegalAccessError::new);
+        userRepository.delete(user);
+    }
 }

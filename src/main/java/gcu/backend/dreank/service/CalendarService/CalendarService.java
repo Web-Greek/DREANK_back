@@ -2,14 +2,12 @@ package gcu.backend.dreank.service.CalendarService;
 
 import gcu.backend.dreank.domain.calendar.Calendar;
 import gcu.backend.dreank.domain.study.Study;
-import gcu.backend.dreank.dto.CalendarDto;
+import gcu.backend.dreank.web.dto.CalendarDto;
 import gcu.backend.dreank.repository.calendarRepository;
 import gcu.backend.dreank.repository.studyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

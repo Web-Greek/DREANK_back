@@ -1,4 +1,4 @@
-package gcu.backend.dreank.dto;
+package gcu.backend.dreank.web.dto;
 
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -4,6 +4,7 @@ import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.user.enums.UserStatus;
+import gcu.backend.dreank.web.dto.request.UserCreateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,6 +22,16 @@ public class User extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public User(UserCreateRequest request) {
+        this.name = request.getName();
+        this.nickname = request.getNickname();
+        this.password = request.getPassword();
+        this.phone = request.getPhone();
+        this.email = request.getEmail();
+        this.birth = request.getBirth();
+        this.status = UserStatus.ACTIVATE;
+        this.introduce = request.getIntroduce();
+    }
 //    null 여부, column 이름 - 동일한 경우 생략, 길이
 //    null이 가능하고, column명과 변수명 동일하다면 @Column 불필요
 
@@ -40,7 +51,7 @@ public class User extends BaseEntity {
     private String email;
 
 //    수정- 년월까지만,,,
-    @Column(nullable = false)
+//    @Column(nullable = false)
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private String birth;
 

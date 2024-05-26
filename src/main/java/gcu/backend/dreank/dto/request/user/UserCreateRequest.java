@@ -1,4 +1,4 @@
-package gcu.backend.dreank.dto.request;
+package gcu.backend.dreank.dto.request.user;
 
 import lombok.Data;
 

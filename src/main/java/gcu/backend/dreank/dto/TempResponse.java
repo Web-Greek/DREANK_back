@@ -1,4 +1,4 @@
-package gcu.backend.dreank.web.dto;
+package gcu.backend.dreank.dto;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;

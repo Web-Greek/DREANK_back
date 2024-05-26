@@ -2,9 +2,8 @@ package gcu.backend.dreank.service;
 
 import gcu.backend.dreank.domain.user.User;
 import gcu.backend.dreank.domain.user.UserRepository;
-import gcu.backend.dreank.web.dto.request.UserCreateRequest;
+import gcu.backend.dreank.dto.request.UserCreateRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 //@Service
 @RequiredArgsConstructor

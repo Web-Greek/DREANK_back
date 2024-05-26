@@ -1,7 +1,7 @@
 package gcu.backend.dreank.controller.user;
 
 import gcu.backend.dreank.service.UserService;
-import gcu.backend.dreank.web.dto.request.UserCreateRequest;
+import gcu.backend.dreank.dto.request.UserCreateRequest;
 import gcu.backend.dreank.web.dto.request.UserUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +19,10 @@ public class UserController {
     }
 
 //    UPDATE- 정보 수정
-    @PutMapping
-    public void updateUser(@RequestBody UserUpdateRequest request){
+    //@PutMapping
+    //public void updateUser(@RequestBody UserUpdateRequest request){
 
-    }
+    //}
 
 //    DELETE
 //    탈퇴하기

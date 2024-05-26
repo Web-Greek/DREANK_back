@@ -4,7 +4,7 @@ import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.user.enums.UserStatus;
-import gcu.backend.dreank.web.dto.request.UserCreateRequest;
+import gcu.backend.dreank.dto.request.UserCreateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,6 +1,9 @@
 package gcu.backend.dreank.controller.user;
 
+import gcu.backend.dreank.dto.request.login.SessionConst;
+import gcu.backend.dreank.dto.request.login.SessionInfo;
 import gcu.backend.dreank.dto.request.user.UserCreateRequest;
+import gcu.backend.dreank.dto.request.user.UserUpdateRequest;
 import gcu.backend.dreank.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +25,14 @@ public class UserController {
     //public void updateUser(@RequestBody UserUpdateRequest request){
 
     //}
+    @PatchMapping("/user/update")
+    public void updateUser(
+            @RequestBody UserUpdateRequest request, @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
+        userService.updateUser(request, sessionInfo.getId());
+    }
 
-//    DELETE
+
+    //    DELETE
 //    탈퇴하기
     @DeleteMapping
     public void deleteUser(@RequestParam String nickname){

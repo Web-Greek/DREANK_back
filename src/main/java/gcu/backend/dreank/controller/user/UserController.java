@@ -25,15 +25,10 @@ public class UserController {
                          @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
         return userService.chkPwd(request, sessionInfo.getId());
     }
+
 //    UPDATE- 정보 수정
     @PatchMapping("/user/update")
-    public void updateUserNickname(
-            @RequestBody UserUpdateRequest request, @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
-        userService.updateUser(request, sessionInfo.getId());
-    }
-
-    @PatchMapping("/user/update")
-    public void updateUserPwd(
+    public void updateUser(
             @RequestBody UserUpdateRequest request, @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
         userService.updateUser(request, sessionInfo.getId());
     }

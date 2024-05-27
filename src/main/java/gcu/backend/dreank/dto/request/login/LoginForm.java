@@ -1,8 +1,8 @@
 package gcu.backend.dreank.dto.request.login;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class LoginForm {
     private String email;
     private String password;

@@ -20,22 +20,23 @@ public class UserController {
         userService.saveUser(request);
     }
 
-//    UPDATE- 정보 수정
-    //@PutMapping
-    //public void updateUser(@RequestBody UserUpdateRequest request){
+//  비밃번호 check - 마이페이지 진입
+    @PostMapping("/user/mypage")
+    public boolean checkPwd(@RequestBody UserUpdateRequest request,
+                         @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
+        return userService.chkPwd(request, sessionInfo.getId());
+    }
 
-    //}
+//    UPDATE- 정보 수정
     @PatchMapping("/user/update")
     public void updateUser(
             @RequestBody UserUpdateRequest request, @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
         userService.updateUser(request, sessionInfo.getId());
     }
-
-
-    //    DELETE
-//    탈퇴하기
-    @DeleteMapping
-    public void deleteUser(@RequestParam String nickname){
-
+    
+//    DELETE - 탈퇴하기
+    @DeleteMapping("/user")
+    public void deleteUser(@SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){
+        userService.deleteUser(sessionInfo.getId());
     }
 }

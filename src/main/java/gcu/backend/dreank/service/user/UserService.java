@@ -20,39 +20,36 @@ public class UserService {
     }
 
 //    READ
-
+    @Transactional(readOnly = true)
+    public boolean chkPwd(UserUpdateRequest request, Long id){
+        User user = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return user.getPassword().equals(request.getPassword());
+    }
 
 //    UPDATE
     public void updateNickname(User user, String nickname){
 //        닉네임 중복 확인
         if(userRepository.existsByNickname(nickname))
-            throw new IllegalArgumentException("중복 닉네임입니다.");
+            throw new IllegalArgumentException("이미 존재하는 닉네임 입니다.");
         user.setNickname(nickname);
-    }
-
-    public void updatePassword(User user, String password, String new_password){
-//        check password
-        if(!user.getPassword().equals(password)){
-            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        }else{
-            user.setPassword(new_password);
-            userRepository.save(user);
-        }
     }
 
     @Transactional
     public void updateUser(UserUpdateRequest request, Long id){
         User user = userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+//        닉네임 변경
         if(request.getNickname() != null)
             updateNickname(user, request.getNickname());
-        else if(request.getPassword() != null)
-            updatePassword(user, request.getPassword(), request.getNew_password());
+//        비밀번호 변경
+        else if(request.getNew_password() != null){
+            user.setPassword(request.getNew_password());
+        }
     }
 
 //    DELETE
     @Transactional
-    public void deleteUser(String nickname){
-        User user = userRepository.findByNickname(nickname)
+    public void deleteUser(long id){
+        User user = userRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
         userRepository.delete(user);
     }

@@ -13,6 +13,4 @@ public class UserUpdateRequest {
 //    새 비밀번호 확인용
     private String new_password;
     private String new_password_;
-
-    private String email;
 }

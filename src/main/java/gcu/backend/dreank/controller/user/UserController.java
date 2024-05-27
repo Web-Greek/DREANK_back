@@ -8,7 +8,7 @@ import gcu.backend.dreank.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-//@RestController
+@RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {

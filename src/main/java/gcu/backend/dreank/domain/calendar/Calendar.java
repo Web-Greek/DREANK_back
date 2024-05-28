@@ -1,13 +1,15 @@
 package gcu.backend.dreank.domain.calendar;
 
-import gcu.backend.dreank.domain.study.Study;
+import gcu.backend.dreank.domain.user.User;
+import gcu.backend.dreank.domain.study.enums.Day;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
+@Table(name = "`calendar`") // 테이블명을 백틱으로 감쌉니다.
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,23 +20,34 @@ public class Calendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // study를 참조하는 N:1관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "study_id")
-    private Study study;
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(nullable = false, length = 100)
+    private String activityName;
 
     @Column(nullable = false)
-    private String title;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime startTime;
 
     @Column(nullable = false)
-    private String description;
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime endTime;
+
+    @Column(nullable = false, length = 20)
+    private String color;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime startTime;
+    @Enumerated(EnumType.STRING)
+    private Day dayOfWeek;
+    // MON, TUE, WED, THU, FRI, SAT, SUN
 
-    @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime endTime;
-
+    public void updateCalendar(String activityName, LocalTime startTime, LocalTime endTime, String color, Day dayOfWeek) {
+        this.activityName = activityName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.color = color;
+        this.dayOfWeek = dayOfWeek;
+    }
 }

@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
+@Table(name = "`user`") // 테이블명을 백틱으로 감쌉니다.
 @Setter
+@Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

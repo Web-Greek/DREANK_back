@@ -75,4 +75,14 @@ public class Study extends BaseEntity {
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<ChatRoom> chatRoomList = new ArrayList<>();
+
+
+    // 캘린더에서 추가한 getter 메서드 (2024/05/28 - 이민우)
+    public LocalTime getStartTime() {
+        return start_time;
+    }
+
+    public LocalTime getEndTime() {
+        return end_time;
+    }
 }

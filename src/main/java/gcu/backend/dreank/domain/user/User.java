@@ -61,7 +61,7 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     private String introduce;
 
     //여기 아래부터, 각 class 생성 후에 import 해야 함

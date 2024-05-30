@@ -3,6 +3,7 @@ package gcu.backend.dreank.dto.request;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.Tag;
 import gcu.backend.dreank.domain.study.enums.Day;
+import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import lombok.Data;
 
 import java.time.LocalTime;
@@ -28,6 +29,7 @@ public class StudyCreateRequest {
                 .end_time(this.end_time)
                 .day(this.day)
                 .tagList(this.tagList)
+                .status(StudyStatus.RECRUIT)
                 .build();
     }
 }

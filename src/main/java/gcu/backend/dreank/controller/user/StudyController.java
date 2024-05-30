@@ -31,6 +31,7 @@ public class StudyController {
     public StudyCreateResponse createStudy(@RequestBody StudyCreateRequest request) {
         return studyService.save(request.toEntity());
     }
+
     //Read
     //스터디 전체 조회
     @GetMapping(value = "/search")

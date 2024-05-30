@@ -33,5 +33,5 @@ public class UserStudy extends BaseEntity {
     @Column(nullable = false)
     @ColumnDefault("'REJECT'")
     @Enumerated(EnumType.STRING)
-    private StudyStatus verify;
+    private Verify verify;
 }

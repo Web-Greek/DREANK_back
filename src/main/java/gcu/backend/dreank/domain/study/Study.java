@@ -41,11 +41,11 @@ public class Study extends BaseEntity {
     private User user; //user 객체
 
 //  시작 시간, 끝시간 날짜로 일단 받음
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME")
     @DateTimeFormat(pattern =  "HH:mm:ss")
     private LocalTime start_time;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME")
     @DateTimeFormat(pattern =  "HH:mm:ss")
     private LocalTime end_time;
 

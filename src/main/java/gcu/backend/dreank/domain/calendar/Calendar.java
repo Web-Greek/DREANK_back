@@ -1,7 +1,7 @@
 package gcu.backend.dreank.domain.calendar;
 
-import gcu.backend.dreank.domain.user.User;
 import gcu.backend.dreank.domain.study.enums.Day;
+import gcu.backend.dreank.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -9,8 +9,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "`calendar`") // 테이블명을 백틱으로 감쌉니다.
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -21,33 +21,27 @@ public class Calendar {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id") // 외래키는 user_id
     private User user;
 
-    @Column(nullable = false, length = 100)
-    private String activityName;
+    @Column(nullable = false)
+    private String title;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime startTime;
+    private String description;
 
-    @Column(nullable = false)
-    @DateTimeFormat(pattern = "HH:mm:ss")
-    private LocalTime endTime;
-
-    @Column(nullable = false, length = 20)
-    private String color;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Day dayOfWeek;
-    // MON, TUE, WED, THU, FRI, SAT, SUN
+    @Column(nullable = false)
+    private Day dayOfWeek; // 요일
 
-    public void updateCalendar(String activityName, LocalTime startTime, LocalTime endTime, String color, Day dayOfWeek) {
-        this.activityName = activityName;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.color = color;
-        this.dayOfWeek = dayOfWeek;
-    }
+    @Column(nullable = false, columnDefinition = "DATETIME")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime startTime; // 시작 시간
+
+    @Column(nullable = false, columnDefinition = "DATETIME")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime endTime; // 종료 시간
+
+    @Column(nullable = false)
+    private boolean isOccupied; // 시간대 사용 여부
 }

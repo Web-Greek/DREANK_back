@@ -14,7 +14,7 @@ public class Tag extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //  user를 참조하는 N:1관계
+    //  study를 참조하는 N:1관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "study_id") //외래키는 study_id
     private Study study; //user 객체

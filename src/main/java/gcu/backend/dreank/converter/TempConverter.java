@@ -1,6 +1,6 @@
 package gcu.backend.dreank.converter;
 
-import gcu.backend.dreank.web.dto.TempResponse;
+import gcu.backend.dreank.dto.TempResponse;
 
 public class TempConverter {
     public static TempResponse.TempTestDTO toTempTestDTO() {

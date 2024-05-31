@@ -2,6 +2,7 @@ package gcu.backend.dreank.domain.mapping;
 
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.study.Study;
+import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.study.enums.Verify;
 import gcu.backend.dreank.domain.user.User;
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor

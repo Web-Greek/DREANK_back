@@ -1,9 +1,9 @@
 package gcu.backend.dreank.dto;
 
+import gcu.backend.dreank.domain.study.enums.Day;
 import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Getter
 @Setter
@@ -11,15 +11,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CalendarDto {
-
     private Long id;
-    private Long studyId;
+    private Long userId;
     private String title;
     private String description;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime startTime;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime endTime;
+    private Day dayOfWeek;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private boolean isOccupied;
 }

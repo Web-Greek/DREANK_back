@@ -1,14 +1,16 @@
 package gcu.backend.dreank.domain.calendar;
 
-import gcu.backend.dreank.domain.study.Study;
+import gcu.backend.dreank.domain.study.enums.Day;
+import gcu.backend.dreank.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -18,10 +20,9 @@ public class Calendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // study를 참조하는 N:1관계
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "study_id")
-    private Study study;
+    @JoinColumn(name = "user_id") // 외래키는 user_id
+    private User user;
 
     @Column(nullable = false)
     private String title;
@@ -29,12 +30,18 @@ public class Calendar {
     @Column(nullable = false)
     private String description;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime startTime;
+    private Day dayOfWeek; // 요일
+
+    @Column(nullable = false, columnDefinition = "DATETIME")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime startTime; // 시작 시간
+
+    @Column(nullable = false, columnDefinition = "DATETIME")
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    private LocalTime endTime; // 종료 시간
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime endTime;
-
+    private boolean isOccupied; // 시간대 사용 여부
 }

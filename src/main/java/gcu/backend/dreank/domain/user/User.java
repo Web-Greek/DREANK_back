@@ -1,5 +1,6 @@
 package gcu.backend.dreank.domain.user;
 
+import gcu.backend.dreank.domain.calendar.Calendar;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.Study;
@@ -41,7 +42,7 @@ public class User extends BaseEntity {
     private String email;
 
 //    수정- 년월까지만,,,
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "DATETIME")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private String birth;
 
@@ -59,6 +60,9 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Study> studyList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Calendar> calendarList = new ArrayList<>();
 
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     //private List<UserChat> userChatList = new ArrayList<>();

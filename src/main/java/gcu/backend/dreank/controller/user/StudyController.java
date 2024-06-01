@@ -42,6 +42,7 @@ public class StudyController {
 
     //스터디 id 통해 모임 찾기
     @GetMapping(value = "/search/{id}")
+    //.... continue
     @ResponseBody
     public StudyResponse getStudy(@PathVariable("id") Long id) {
         return studyService.findById(id);

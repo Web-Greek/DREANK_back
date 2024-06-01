@@ -1,6 +1,8 @@
 package gcu.backend.dreank.service.user;
 
 import gcu.backend.dreank.domain.user.User;
+import gcu.backend.dreank.dto.request.StudyCreateResponse;
+import gcu.backend.dreank.dto.request.user.UserCreateResponse;
 import gcu.backend.dreank.repository.UserRepository;
 import gcu.backend.dreank.dto.request.user.UserCreateRequest;
 import gcu.backend.dreank.dto.request.user.UserUpdateRequest;
@@ -17,6 +19,7 @@ public class UserService {
     @Transactional
     public void saveUser(UserCreateRequest request){
         userRepository.save(new User(request));
+        //return UserCreateResponse.of(userRepository.save(new User(request)));
     }
 
 //    READ

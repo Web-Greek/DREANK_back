@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor //(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class User extends BaseEntity {
     @Id
@@ -34,9 +34,6 @@ public class User extends BaseEntity {
         this.status = UserStatus.ACTIVATE;
         this.introduce = request.getIntroduce();
     }
-//    null 여부, column 이름 - 동일한 경우 생략, 길이
-//    null이 가능하고, column명과 변수명 동일하다면 @Column 불필요
-
     @Column(nullable = false, length = 20)
     private String name;
 

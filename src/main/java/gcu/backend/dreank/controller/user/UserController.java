@@ -20,7 +20,7 @@ public class UserController {
         userService.saveUser(request);
     }
 
-//  비밃번호 check - 마이페이지 진입
+    //비밃번호 check - 마이페이지 진입
     @PostMapping("/user/mypage")
     public boolean checkPwd(@RequestBody UserUpdateRequest request,
                          @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo){

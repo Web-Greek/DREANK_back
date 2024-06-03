@@ -24,7 +24,7 @@ public class CalendarController {
         return ResponseEntity.ok(calendar);
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Calendar> updateCalendarEntry(@PathVariable Long userId, @PathVariable Long id, @RequestBody CalendarRequest request) {
         request.setUserId(userId);
         Calendar calendar = calendarService.updateCalendarEntry(id, request);
@@ -43,9 +43,12 @@ public class CalendarController {
         return ResponseEntity.ok(calendar);
     }
 
-    @GetMapping("/overlapping-studies")
+    @GetMapping("/searchGroupUsingCalendar")
     public ResponseEntity<List<Study>> findOverlappingStudyGroups(@PathVariable Long userId) {
         List<Study> overlappingStudies = calendarService.findOverlappingStudyGroups(userId);
+        if (overlappingStudies.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
         return ResponseEntity.ok(overlappingStudies);
     }
 }

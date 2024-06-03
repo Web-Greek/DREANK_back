@@ -8,6 +8,8 @@ import gcu.backend.dreank.dto.request.user.UserCreateRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor //(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,6 +70,7 @@ public class User extends BaseEntity {
     private List<UserStudy> userStudyList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Study> studyList = new ArrayList<>();
 
     //@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

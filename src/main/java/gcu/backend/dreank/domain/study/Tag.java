@@ -1,5 +1,7 @@
 package gcu.backend.dreank.domain.study;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,6 +17,7 @@ public class Tag extends BaseEntity {
     private Long id;
 
     //  study를 참조하는 N:1관계
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "study_id") //외래키는 study_id
     private Study study; //user 객체

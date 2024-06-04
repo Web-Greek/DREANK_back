@@ -1,5 +1,6 @@
 package gcu.backend.dreank.domain.study;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.mapping.ChatRoom;
 import gcu.backend.dreank.domain.mapping.UserStudy;
@@ -8,6 +9,7 @@ import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.user.User;
 import gcu.backend.dreank.dto.request.StudyCreateRequest;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -20,6 +22,7 @@ import java.util.List;
 @Entity @Getter @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Study extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +66,7 @@ public class Study extends BaseEntity {
     private User user; //user 객체
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Tag> tagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)

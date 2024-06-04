@@ -2,12 +2,14 @@ package gcu.backend.dreank.controller.calendar;
 
 import gcu.backend.dreank.domain.calendar.Calendar;
 import gcu.backend.dreank.domain.study.Study;
+import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.dto.CalendarRequest;
 import gcu.backend.dreank.service.Calendar.CalendarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -50,5 +52,14 @@ public class CalendarController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(overlappingStudies);
+    }
+
+    @GetMapping("/filterByTagAndTime")
+    public ResponseEntity<?> filterByTagAndTime(@PathVariable Long userId, @RequestParam String tagContent, @RequestParam Day preferredDay, @RequestParam String preferredStartTime, @RequestParam String preferredEndTime) {
+        List<Study> matchingStudies = calendarService.findMatchingStudyGroups(userId, tagContent, preferredDay, LocalTime.parse(preferredStartTime), LocalTime.parse(preferredEndTime));
+        if (matchingStudies.isEmpty()) {
+            return ResponseEntity.ok("조건에 맞는 스터디가 없습니다");
+        }
+        return ResponseEntity.ok(matchingStudies);
     }
 }

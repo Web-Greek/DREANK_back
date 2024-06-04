@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalTime;
 
 @Entity
-@Table(name = "`calendar`") // 테이블명을 백틱으로 감쌉니다.
+@Table(name = "`calendar`")
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

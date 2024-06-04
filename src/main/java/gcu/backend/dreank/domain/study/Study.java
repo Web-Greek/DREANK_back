@@ -7,6 +7,7 @@ import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.user.User;
 import gcu.backend.dreank.dto.request.StudyCreateRequest;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -58,6 +59,7 @@ public class Study extends BaseEntity {
     //양방향 매핑
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "leader_id") //외래키는 leader_id
+    @JsonBackReference
     private User user; //user 객체
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)

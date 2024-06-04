@@ -31,6 +31,18 @@ public class CalendarService {
         User user = userRepository.findById(request.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
+        // 중복 일정 확인
+        List<Calendar> overlappingCalendars = calendarRepository.checkDuplication(
+                request.getUserId(),
+                request.getDayOfWeek(),
+                request.getEndTime(),
+                request.getStartTime()
+        );
+
+        if (!overlappingCalendars.isEmpty()) {
+            throw new IllegalArgumentException("해당 시간에 등록된 일정이 이미 존재합니다. 시간을 수정해 주세요");
+        }
+
         Calendar calendar = Calendar.builder()
                 .user(user)
                 .activityName(request.getActivityName())
@@ -48,6 +60,18 @@ public class CalendarService {
         Calendar calendar = calendarRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Calendar entry not found"));
 
+        // 중복 일정 확인 (업데이트 시에도 확인)
+        List<Calendar> overlappingCalendars = calendarRepository.checkDuplication(
+                calendar.getUser().getId(),
+                request.getDayOfWeek(),
+                request.getEndTime(),
+                request.getStartTime()
+        );
+
+        if (!overlappingCalendars.isEmpty()) {
+            throw new IllegalArgumentException("해당 시간에 등록된 일정이 이미 존재합니다. 시간을 수정해 주세요");
+        }
+
         calendar.updateCalendar(
                 request.getActivityName(),
                 request.getStartTime(),
@@ -55,6 +79,7 @@ public class CalendarService {
                 request.getColor(),
                 request.getDayOfWeek()
         );
+
 
         return calendarRepository.save(calendar);
     }
@@ -75,7 +100,7 @@ public class CalendarService {
 
         List<Study> overlappingStudies = new ArrayList<>();
 
-        // 사용자의 자유 시간대 계산
+        // 사용자 자유 시간대 계산
         List<TimeSlot> freeTimeSlots = calculateFreeTime(userCalendar);
 
         // 스터디 그룹 일정과 비교
@@ -94,7 +119,6 @@ public class CalendarService {
     private List<TimeSlot> calculateFreeTime(List<Calendar> userCalendar) {
         List<TimeSlot> freeTimeSlots = new ArrayList<>();
 
-        //ex - 하루의 시작 끝 정의
         LocalTime dayStart = LocalTime.of(0, 0);
         LocalTime dayEnd = LocalTime.of(23, 59);
 
@@ -112,10 +136,10 @@ public class CalendarService {
 
             for (Calendar calendar : userCalendar) {
                 if (calendar.getDayOfWeek() == day) {
-                    // 자유 시간대 계산 로직
+                    // 자유 시간대 계산
                     if (calendar.getStartTime().isAfter(lastEndTime)) {
-                        // 자유 시간대 추가 로직
-                        // 예: freeTimeSlots.add(new TimeSlot(lastEndTime, calendar.getStartTime()));
+                        // 자유 시간대 추가
+                        freeTimeSlots.add(new TimeSlot(lastEndTime, calendar.getStartTime(), day));
                     }
                     lastEndTime = calendar.getEndTime();
                 }
@@ -123,7 +147,7 @@ public class CalendarService {
 
             if (lastEndTime.isBefore(dayEnd)) {
                 // 자유 시간대 추가 로직
-                // 예: freeTimeSlots.add(new TimeSlot(lastEndTime, dayEnd));
+                freeTimeSlots.add(new TimeSlot(lastEndTime, dayEnd, day));
             }
         }
 

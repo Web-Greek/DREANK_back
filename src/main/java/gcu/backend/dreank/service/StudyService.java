@@ -101,10 +101,15 @@ public class StudyService {
 
         return new StudyResponse(study);
     }
+
+    public void deleteStudy(long id){
+        Study study = studyRepository.findById(id)
+                .orElseThrow(IllegalAccessError::new);
+        studyRepository.delete(study);
+    }
 }
 
 /*
-
 public Study saveStudy(@RequestBody StudyCreateRequest request) {
         return studyService.create(request);
     }

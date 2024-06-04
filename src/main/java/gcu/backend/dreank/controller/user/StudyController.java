@@ -6,6 +6,8 @@ import gcu.backend.dreank.dto.request.StudyCreateRequest;
 import gcu.backend.dreank.dto.request.StudyCreateResponse;
 import gcu.backend.dreank.dto.request.StudyResponse;
 import gcu.backend.dreank.dto.request.StudyUpdateRequest;
+import gcu.backend.dreank.dto.request.login.SessionConst;
+import gcu.backend.dreank.dto.request.login.SessionInfo;
 import gcu.backend.dreank.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -72,10 +74,11 @@ public class StudyController {
 
     //Update
     //구성원 승인 - joinstudy 수정 필요
-    @PatchMapping("/accept/{id}")
+    @PatchMapping("/accept/{studyid}")
     @ResponseBody
-    public StudyResponse update(@PathVariable Long id, @RequestBody StudyUpdateRequest request) {
-        request.setStudyId(id); //request할 study id를 설정
+    public StudyResponse update(@PathVariable Long studyid, @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo, @RequestBody StudyUpdateRequest request) {
+        request.setStudyId(studyid); //request할 study id를 설정
+        request.setUserId(sessionInfo.getId());
         return studyService.accept(request);
     }
 

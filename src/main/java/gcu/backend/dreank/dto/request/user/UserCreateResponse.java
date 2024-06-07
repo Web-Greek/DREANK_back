@@ -11,13 +11,13 @@ public class UserCreateResponse {
 
     private String email;
     private String password;
-    private String password_;
+
 
     private String nickname;
-    private String name;
+
     private String introduce;
     private String phone;
-    private String birth;
+
 
     //응답생성
     //public static gcu.backend.dreank.dto.request.user.UserCreateResponse of(final User user) {

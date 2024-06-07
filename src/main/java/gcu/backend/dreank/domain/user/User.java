@@ -28,17 +28,15 @@ public class User extends BaseEntity {
     private Long id;
 
     public User(UserCreateRequest request) {
-        this.name = request.getName();
+
         this.nickname = request.getNickname();
         this.password = request.getPassword();
         this.phone = request.getPhone();
         this.email = request.getEmail();
-        this.birth = request.getBirth();
+
         this.status = UserStatus.ACTIVATE;
         this.introduce = request.getIntroduce();
     }
-    @Column(nullable = false, length = 20)
-    private String name;
 
     @Column(nullable = false, length = 20)
     private String nickname;
@@ -52,10 +50,6 @@ public class User extends BaseEntity {
     @Column(nullable = false, length = 40)
     private String email;
 
-//    수정- 년월까지만,,,
-//    @Column(nullable = false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private String birth;
 
 //  activated in mysql
     @Column(nullable = false)

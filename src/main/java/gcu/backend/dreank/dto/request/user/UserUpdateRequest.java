@@ -9,7 +9,7 @@ public class UserUpdateRequest {
     private String nickname;
     private String password;
     private String new_password;
-    private String new_password_;
+    private String introduce; // 한줄 소개
 
     // 객체를 JSON 문자열로 변환하는 메서드
     public String toJson() {

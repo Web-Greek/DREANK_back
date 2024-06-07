@@ -7,13 +7,13 @@ public class UserCreateRequest {
 //    아이디
     private String email;
     private String password;
-    private String password_;
+
 
     private String nickname;
-    private String name;
+
     private String introduce;
     private String phone;
-    private String birth;
+
 
     public void setEmail(String email) {
         // 이메일 형식이 유효한지 검사

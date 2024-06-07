@@ -14,6 +14,8 @@ import java.util.List;
 public interface CalendarRepository extends JpaRepository<Calendar, Long> {
     List<Calendar> findByUserId(Long userId);
 
+    void deleteByUserId(Long userId);
+
     // 겹치는 일정이 있는지 확인
     @Query("SELECT c FROM Calendar c WHERE c.user.id = :userId AND c.dayOfWeek = :dayOfWeek AND c.startTime < :endTime AND c.endTime > :startTime")
     List<Calendar> checkDuplication(@Param("userId") Long userId, @Param("dayOfWeek") Day dayOfWeek, @Param("endTime") LocalTime endTime, @Param("startTime") LocalTime startTime);

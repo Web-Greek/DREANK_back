@@ -18,7 +18,7 @@ public class LoginService {
     private final UserRepository userRepository;
 
     @Transactional(readOnly = true)
-    public void login(LoginForm form, HttpServletRequest request){
+    public User login(LoginForm form, HttpServletRequest request){
         User user = userRepository.findByEmailAndPassword(form.getEmail(), form.getPassword())
                 .orElseThrow(IllegalAccessError::new);
 
@@ -30,6 +30,7 @@ public class LoginService {
         userSession.setNickname(user.getNickname());
 
         session.setAttribute(SessionConst.LOGIN_MEMBER, userSession);
+        return user;
     }
 
     public void logout(HttpServletRequest request){

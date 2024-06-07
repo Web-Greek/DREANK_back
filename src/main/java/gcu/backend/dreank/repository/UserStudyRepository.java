@@ -11,4 +11,6 @@ import java.util.Optional;
 @Repository
 public interface UserStudyRepository extends JpaRepository<UserStudy, Long> {
     Optional<UserStudy> findByUserAndStudy(User user, Study study);
+
+    void deleteByUserId(Long userId);
 }

@@ -133,7 +133,7 @@ public class CalendarService {
         List<Study> matchingStudies = new ArrayList<>();
 
         for (Study study : taggedStudies) {
-            if (study.getDay() == preferredDay && isTimeSlotMatching(study, preferredStartTime, preferredEndTime)) {
+            if (study.getDay().equals(preferredDay) && isTimeSlotMatching(study, preferredStartTime, preferredEndTime)) {
                 for (TimeSlot freeSlot : freeTimeSlots) {
                     if (isOverlapping(freeSlot, study)) {
                         matchingStudies.add(study);

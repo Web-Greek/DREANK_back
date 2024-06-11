@@ -13,7 +13,7 @@ public class StudyResponse {
     private int num_recruit;
     private LocalTime start_time;
     private LocalTime end_time;
-    private Day day; //MON, TUE, WED, THU, FRI, SAT, SUN
+    private String day; //MON, TUE, WED, THU, FRI, SAT, SUN
     private List<Tag> tagList; //스터디 tag 리스트
 
     public StudyResponse(Study study) {

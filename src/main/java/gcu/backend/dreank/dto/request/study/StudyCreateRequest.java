@@ -1,4 +1,4 @@
-package gcu.backend.dreank.dto.request;
+package gcu.backend.dreank.dto.request.study;
 
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.Tag;
@@ -17,7 +17,7 @@ public class StudyCreateRequest {
     private int num_recruit;
     private LocalTime start_time;
     private LocalTime end_time;
-    private Day day; //MON, TUE, WED, THU, FRI, SAT, SUN
+    private String day; //월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 일요일
     private List<Tag> tagList; //스터디 tag 리스트
 
     public Study toEntity() {

@@ -1,8 +1,6 @@
 package gcu.backend.dreank.service.user;
 
 import gcu.backend.dreank.domain.user.User;
-import gcu.backend.dreank.dto.request.StudyCreateResponse;
-import gcu.backend.dreank.dto.request.user.UserCreateResponse;
 import gcu.backend.dreank.repository.CalendarRepository;
 import gcu.backend.dreank.repository.StudyRepository;
 import gcu.backend.dreank.repository.UserRepository;

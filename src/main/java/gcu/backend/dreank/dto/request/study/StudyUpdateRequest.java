@@ -1,10 +1,7 @@
-package gcu.backend.dreank.dto.request;
+package gcu.backend.dreank.dto.request.study;
 
-import gcu.backend.dreank.domain.study.Study;
-import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.study.enums.Verify;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 public class StudyUpdateRequest {

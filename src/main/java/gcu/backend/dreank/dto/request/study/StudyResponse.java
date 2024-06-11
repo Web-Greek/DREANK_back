@@ -1,4 +1,4 @@
-package gcu.backend.dreank.dto.request;
+package gcu.backend.dreank.dto.request.study;
 
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.Tag;

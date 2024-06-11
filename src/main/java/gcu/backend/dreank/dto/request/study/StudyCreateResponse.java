@@ -1,7 +1,6 @@
-package gcu.backend.dreank.dto.request;
+package gcu.backend.dreank.dto.request.study;
 
 import gcu.backend.dreank.domain.study.Study;
-import gcu.backend.dreank.domain.user.User;
 import lombok.*;
 
 @Getter
@@ -13,6 +12,5 @@ public class StudyCreateResponse {
 
     public static StudyCreateResponse of(final Study study) {
         return new StudyCreateResponse(study.getId(), study.getName());
-        //return new StudyCreateResponse(study)
     }
 }

@@ -2,20 +2,16 @@ package gcu.backend.dreank.controller.user;
 
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
-import gcu.backend.dreank.dto.request.StudyCreateRequest;
-import gcu.backend.dreank.dto.request.StudyCreateResponse;
-import gcu.backend.dreank.dto.request.StudyResponse;
-import gcu.backend.dreank.dto.request.StudyUpdateRequest;
+import gcu.backend.dreank.dto.request.study.StudyCreateRequest;
+import gcu.backend.dreank.dto.request.study.StudyCreateResponse;
+import gcu.backend.dreank.dto.request.study.StudyResponse;
+import gcu.backend.dreank.dto.request.study.StudyUpdateRequest;
 import gcu.backend.dreank.dto.request.login.SessionConst;
 import gcu.backend.dreank.dto.request.login.SessionInfo;
 import gcu.backend.dreank.service.StudyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.List;
 

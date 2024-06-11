@@ -7,7 +7,6 @@ import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.user.User;
-import gcu.backend.dreank.dto.request.StudyCreateRequest;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -38,16 +37,16 @@ public class Study extends BaseEntity {
     private int num_recruit;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime start_time;
 
     @Column(nullable = false)
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime end_time;
 
     @Column(nullable = false, length = 20)
-    @Enumerated(EnumType.STRING)
-    private Day day;
+    //@Enumerated(EnumType.STRING)
+    private String day;
 
     @Column(nullable = false)
     @ColumnDefault("0")

@@ -3,6 +3,7 @@ package gcu.backend.dreank.service;
 import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
+import gcu.backend.dreank.domain.study.enums.Verify;
 import gcu.backend.dreank.domain.user.User;
 import gcu.backend.dreank.dto.request.study.StudyCreateResponse;
 import gcu.backend.dreank.dto.request.study.StudyResponse;
@@ -93,19 +94,42 @@ public class StudyService {
         return studyResponseList;
     }
 
-    public StudyResponse accept(StudyUpdateRequest request) {
-        Study study = studyRepository.findById(request.getStudyId())
+    public StudyResponse apply(Long studyid, Long userid) {
+        Study study = studyRepository.findById(studyid)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 스터디가 없습니다."));
 
-        User user = userRepository.findById(request.getUserId())
+        User user = userRepository.findById(userid)
+                .orElseThrow(() -> new IllegalArgumentException("유저를 찾지 못했습니다."));
+
+        UserStudy userStudy = new UserStudy(user, study);
+        userStudyRepository.save(userStudy);
+
+        return new StudyResponse(study);
+    }
+
+    public StudyResponse accept(Long studyid, Long userid) {
+        Study study = studyRepository.findById(studyid)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 스터디가 없습니다."));
+
+        User user = userRepository.findById(userid)
                 .orElseThrow(() -> new IllegalArgumentException("승인할 유저를 찾지 못했습니다."));
 
         UserStudy userStudy = userStudyRepository.findByUserAndStudy(user, study)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 유저스터디 매핑이 없습니다."));
 
-        userStudy.setVerify(request.getVerify());
+        userStudy.setVerify(Verify.ACCEPT);
 
         userStudyRepository.save(userStudy);
+
+        return new StudyResponse(study);
+    }
+
+    public StudyResponse completeStatus(Long studyid) {
+        Study study = studyRepository.findById(studyid)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 스터디가 없습니다."));
+
+        study.setStatus(StudyStatus.COMPLETED);
+        studyRepository.save(study);
 
         return new StudyResponse(study);
     }

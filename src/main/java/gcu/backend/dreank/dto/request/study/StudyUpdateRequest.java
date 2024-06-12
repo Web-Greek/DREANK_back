@@ -5,7 +5,5 @@ import lombok.Data;
 
 @Data
 public class StudyUpdateRequest {
-    private Long studyId;
-    private Long userId;
     private Verify verify;
 }

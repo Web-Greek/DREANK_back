@@ -5,6 +5,7 @@ import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
 import gcu.backend.dreank.domain.study.enums.Verify;
 import gcu.backend.dreank.domain.user.User;
+import gcu.backend.dreank.domain.user.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -20,6 +21,12 @@ public class UserStudy extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public UserStudy(User user, Study study) {
+        this.user = user;
+        this.study = study;
+        this.verify = Verify.WAITING;
+    }
+
     //  user를 참조하는 N:1관계
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") //외래키는 user_id
@@ -34,4 +41,6 @@ public class UserStudy extends BaseEntity {
     @ColumnDefault("'REJECT'")
     @Enumerated(EnumType.STRING)
     private Verify verify;
+
+
 }

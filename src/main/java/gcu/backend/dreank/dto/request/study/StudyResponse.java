@@ -3,10 +3,12 @@ package gcu.backend.dreank.dto.request.study;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.Tag;
 import gcu.backend.dreank.domain.study.enums.Day;
+import lombok.Getter;
 
 import java.time.LocalTime;
 import java.util.List;
 
+@Getter
 public class StudyResponse {
     private String name;
     private String introduction;

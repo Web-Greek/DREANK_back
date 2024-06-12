@@ -53,11 +53,13 @@ public class StudyController {
         return studyService.findByName(name);
     }
 
+    //스터디 태그로 가져오기
     @GetMapping(value = "/search/tag")
     @ResponseBody
     public List<StudyResponse> getStudyByTag(@RequestParam("tag") String tag) {
         return studyService.findByTag(tag);
     }
+
     //스터디 랭킹 조회
     @GetMapping(value = "/search/rank")
     @ResponseBody
@@ -73,14 +75,25 @@ public class StudyController {
         return studyService.findByStatus(status);
     }
 
+
     //Update
     //구성원 승인 - joinstudy 수정 필요
-    @PatchMapping("/accept/{studyid}")
+    @PatchMapping("/{studyid}/accept/{userid}")
     @ResponseBody
-    public StudyResponse update(@PathVariable Long studyid, @SessionAttribute(SessionConst.LOGIN_MEMBER) SessionInfo sessionInfo, @RequestBody StudyUpdateRequest request) {
-        request.setStudyId(studyid); //request할 study id를 설정
-        request.setUserId(sessionInfo.getId());
-        return studyService.accept(request);
+    public StudyResponse update(@PathVariable Long studyid, @PathVariable Long userid) {
+        return studyService.accept(studyid, userid);
+    }
+
+    @PostMapping(value = "/{studyid}/apply/{userid}", produces = "application/json")
+    @ResponseBody
+    public StudyResponse apply(@PathVariable Long studyid, @PathVariable Long userid) {
+        return studyService.apply(studyid, userid);
+    }
+
+    @PatchMapping("/{studyid}/status")
+    @ResponseBody
+    public StudyResponse updateStatus(@PathVariable Long studyid) {
+        return studyService.completeStatus(studyid);
     }
 
     //delete

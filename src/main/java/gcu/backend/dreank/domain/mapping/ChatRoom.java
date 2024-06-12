@@ -1,5 +1,7 @@
 package gcu.backend.dreank.domain.mapping;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import gcu.backend.dreank.domain.chat.Chatting;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.user.User;
@@ -21,10 +23,11 @@ public class ChatRoom extends BaseEntity {
     private Long id;
 
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.ALL)
-    private List<UserChat> userChatList = new ArrayList<>();
+    private List<Chatting> chattingList = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     @JoinColumn(name = "study_id") //외래키는 study_id
     private Study study;
 }

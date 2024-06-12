@@ -15,7 +15,6 @@ import java.time.LocalTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Calendar {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

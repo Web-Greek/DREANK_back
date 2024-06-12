@@ -14,10 +14,16 @@ import gcu.backend.dreank.repository.UserStudyRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import javax.swing.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -43,14 +49,29 @@ public class StudyService {
         return new StudyResponse(study);
     }
 
-    public List<StudyResponse> findByTag(String tag) {
+    public List<Study> findByTag(String tag) {
         List<Study> studyList = studyRepository.findByTag(tag);
-        List<StudyResponse> studyResponseList = new ArrayList<>();
         if(studyList.isEmpty()) {
             throw new IllegalArgumentException("해당 태그의 스터디가 없습니다. tag=" + tag);
         }
 
-        return studyResponseList;
+        return studyList;
+    }
+
+    public HashSet<Study> findMyStudy(Long userid) {
+        User user = userRepository.findById(userid)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 사용자가 없습니다."));
+
+        List<UserStudy> userStudyList = userStudyRepository.findByUser(user);
+        HashSet<Study> studySet = new HashSet<>();
+
+        for(UserStudy userStudy : userStudyList) {
+            if (userStudy.getVerify() == Verify.ACCEPT) {
+                studySet.add(userStudy.getStudy());
+            }
+        }
+
+        return studySet;
     }
 
     public List<StudyResponse> findByName(String name) {
@@ -64,6 +85,15 @@ public class StudyService {
             studyResponseList.add(new StudyResponse(study));
         }
         return studyResponseList;
+    }
+
+
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public class NoContentException extends RuntimeException {
+        public NoContentException(String message) {
+            super(message);
+        }
     }
 
     public List<StudyResponse> findThreeRank() {

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -56,8 +57,15 @@ public class StudyController {
     //스터디 태그로 가져오기
     @GetMapping(value = "/search/tag")
     @ResponseBody
-    public List<StudyResponse> getStudyByTag(@RequestParam("tag") String tag) {
+    public List<Study> getStudyByTag(@RequestParam("tag") String tag) {
         return studyService.findByTag(tag);
+    }
+
+    //내가 만든 스터디 가져오기
+    @GetMapping(value = "/search/my/{userid}")
+    @ResponseBody
+    public HashSet<Study> getMyStudy(@PathVariable("userid") Long userid) {
+        return studyService.findMyStudy(userid);
     }
 
     //스터디 랭킹 조회
@@ -84,6 +92,7 @@ public class StudyController {
         return studyService.accept(studyid, userid);
     }
 
+    //스터디 가입
     @PostMapping(value = "/{studyid}/apply/{userid}", produces = "application/json")
     @ResponseBody
     public StudyResponse apply(@PathVariable Long studyid, @PathVariable Long userid) {

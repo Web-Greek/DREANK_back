@@ -1,5 +1,6 @@
 package gcu.backend.dreank.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.mapping.UserStudy;
 import gcu.backend.dreank.domain.study.Study;
@@ -61,6 +62,8 @@ public class User extends BaseEntity {
 
     //여기 아래부터, 각 class 생성 후에 import 해야 함
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
     private List<UserStudy> userStudyList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

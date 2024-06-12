@@ -1,5 +1,6 @@
 package gcu.backend.dreank.domain.study;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.mapping.ChatRoom;
@@ -71,6 +72,8 @@ public class Study extends BaseEntity {
     //private List<Tag> tagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    @JsonIgnore
+    @JsonManagedReference
     private List<UserStudy> partList = new ArrayList<>();
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)

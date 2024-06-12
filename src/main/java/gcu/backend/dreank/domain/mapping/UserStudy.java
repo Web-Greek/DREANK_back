@@ -1,5 +1,6 @@
 package gcu.backend.dreank.domain.mapping;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import gcu.backend.dreank.domain.common.BaseEntity;
 import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
@@ -28,6 +29,7 @@ public class UserStudy extends BaseEntity {
     }
 
     //  user를 참조하는 N:1관계
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") //외래키는 user_id
     private User user; //user 객체

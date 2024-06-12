@@ -13,5 +13,6 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     List<Study> findTop3ByOrderByScoreDesc();
     List<Study> findByStatus(StudyStatus status);
     List<Study> findByTag(String tag);
+    List<Study> findByUser_Id(Long userId);
     void deleteByUserId(Long userId);
 }

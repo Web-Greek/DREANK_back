@@ -25,9 +25,10 @@ public class StudyController {
 
     //Create
     //스터디 생성
-    @PostMapping("/post")
+    @PostMapping("/post/{leader}")
     @ResponseBody
-    public StudyCreateResponse createStudy(@RequestBody StudyCreateRequest request) {
+    public StudyCreateResponse createStudy(@PathVariable("leader") Long leader, @RequestBody StudyCreateRequest request) {
+        request.setLeader(leader);
         return studyService.save(request.toEntity());
     }
 
@@ -41,7 +42,6 @@ public class StudyController {
 
     //스터디 id 통해 모임 찾기
     @GetMapping(value = "/search/{id}")
-    //.... continue
     @ResponseBody
     public StudyResponse getStudy(@PathVariable("id") Long id) {
         return studyService.findById(id);
@@ -61,8 +61,15 @@ public class StudyController {
         return studyService.findByTag(tag);
     }
 
-    //내가 만든 스터디 가져오기
-    @GetMapping(value = "/search/my/{userid}")
+    //내가 만든 스터디
+    @GetMapping(value="/search/my/{userid}")
+    @ResponseBody
+    public List<Study> getMakeStudy(@PathVariable("userid") Long userid) {
+        return studyService.findMakeStudy(userid);
+    }
+
+    //내가 가입한 스터디
+    @GetMapping(value = "/search/study/{userid}")
     @ResponseBody
     public HashSet<Study> getMyStudy(@PathVariable("userid") Long userid) {
         return studyService.findMyStudy(userid);

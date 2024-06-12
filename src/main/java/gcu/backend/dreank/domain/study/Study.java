@@ -61,9 +61,12 @@ public class Study extends BaseEntity {
     @Column(nullable = false, length = 20)
     private String tag;
 
+    @Column(nullable = false)
+    private Long leader;
+
     //양방향 매핑
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "leader_id") //외래키는 leader_id
+    @JoinColumn(name = "user_id") //외래키는 leader_id
     @JsonBackReference
     private User user; //user 객체
 

@@ -9,8 +9,9 @@ import lombok.*;
 public class StudyCreateResponse {
     private Long id;
     private String name;
+    private Long leader;
 
     public static StudyCreateResponse of(final Study study) {
-        return new StudyCreateResponse(study.getId(), study.getName());
+        return new StudyCreateResponse(study.getId(), study.getName(), study.getLeader());
     }
 }

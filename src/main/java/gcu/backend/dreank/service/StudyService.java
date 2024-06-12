@@ -19,10 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,7 +68,16 @@ public class StudyService {
             }
         }
 
+
         return studySet;
+    }
+
+    public List<Study> findMakeStudy(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 사용자가 없습니다."));
+
+        // 리더 아이디로 스터디 리스트를 가져옵니다.
+        return studyRepository.findAllByLeader(userId);
     }
 
     public List<StudyResponse> findByName(String name) {

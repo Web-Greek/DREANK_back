@@ -4,7 +4,11 @@ import gcu.backend.dreank.domain.study.Study;
 import gcu.backend.dreank.domain.study.Tag;
 import gcu.backend.dreank.domain.study.enums.Day;
 import gcu.backend.dreank.domain.study.enums.StudyStatus;
+import gcu.backend.dreank.service.user.UserService;
 import lombok.Data;
+import gcu.backend.dreank.domain.user.User;
+import gcu.backend.dreank.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -19,6 +23,9 @@ public class StudyCreateRequest {
     private LocalTime end_time;
     private String day;
     private String tag; //스터디 tag 리스트
+    private Long leader;
+
+    private UserService userService;
 
     public Study toEntity() {
         return Study.builder()
@@ -30,6 +37,7 @@ public class StudyCreateRequest {
                 .day(this.day)
                 .tag(this.tag)
                 .status(StudyStatus.RECRUIT)
+                .leader(this.leader)
                 .build();
     }
 }

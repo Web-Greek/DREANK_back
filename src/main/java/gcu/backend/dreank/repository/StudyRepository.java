@@ -14,5 +14,6 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     List<Study> findByStatus(StudyStatus status);
     List<Study> findByTag(String tag);
     List<Study> findByUser_Id(Long userId);
+    List<Study> findAllByLeader(Long leaderId);
     void deleteByUserId(Long userId);
 }

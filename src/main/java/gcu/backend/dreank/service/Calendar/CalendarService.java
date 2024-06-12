@@ -124,16 +124,21 @@ public class CalendarService {
     @Transactional(readOnly = true)
     public List<Study> findMatchingStudyGroups(Long userId, String tagContent, Day preferredDay, LocalTime preferredStartTime, LocalTime preferredEndTime) {
         List<Calendar> userCalendar = calendarRepository.findByUserId(userId);
-        List<Tag> tags = tagRepository.findByContent(tagContent);
-        List<Study> taggedStudies = tags.stream()
-                .map(Tag::getStudy)
-                .distinct()
-                .collect(Collectors.toList());
+        List<Study> studies;
+
+        if (tagContent != null && !tagContent.isEmpty()) {
+            studies = studyRepository.findAll().stream()
+                    .filter(study -> study.getTag().equalsIgnoreCase(tagContent))
+                    .collect(Collectors.toList());
+        } else {
+            studies = studyRepository.findAll();
+        }
+
         List<TimeSlot> freeTimeSlots = calculateFreeTime(userCalendar);
         List<Study> matchingStudies = new ArrayList<>();
 
-        for (Study study : taggedStudies) {
-            if (study.getDay().equals(preferredDay) && isTimeSlotMatching(study, preferredStartTime, preferredEndTime)) {
+        for (Study study : studies) {
+            if (Day.valueOf(study.getDay()).equals(preferredDay) && isTimeSlotMatching(study, preferredStartTime, preferredEndTime)) {
                 for (TimeSlot freeSlot : freeTimeSlots) {
                     if (isOverlapping(freeSlot, study)) {
                         matchingStudies.add(study);

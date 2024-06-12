@@ -14,7 +14,7 @@ public class StudyResponse {
     private LocalTime start_time;
     private LocalTime end_time;
     private String day; //MON, TUE, WED, THU, FRI, SAT, SUN
-    private List<Tag> tagList; //스터디 tag 리스트
+    private String tag; //스터디 tag 리스트
 
     public StudyResponse(Study study) {
         this.name = study.getName();
@@ -23,6 +23,6 @@ public class StudyResponse {
         this.start_time = study.getStart_time();
         this.end_time = study.getEnd_time();
         this.day = study.getDay();
-        this.tagList = study.getTagList();
+        this.tag = study.getTag();
     }
 }

@@ -53,6 +53,11 @@ public class StudyController {
         return studyService.findByName(name);
     }
 
+    @GetMapping(value = "/search/tag")
+    @ResponseBody
+    public List<StudyResponse> getStudyByTag(@RequestParam("tag") String tag) {
+        return studyService.findByTag(tag);
+    }
     //스터디 랭킹 조회
     @GetMapping(value = "/search/rank")
     @ResponseBody

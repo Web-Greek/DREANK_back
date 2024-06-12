@@ -42,6 +42,16 @@ public class StudyService {
         return new StudyResponse(study);
     }
 
+    public List<StudyResponse> findByTag(String tag) {
+        List<Study> studyList = studyRepository.findByTag(tag);
+        List<StudyResponse> studyResponseList = new ArrayList<>();
+        if(studyList.isEmpty()) {
+            throw new IllegalArgumentException("해당 태그의 스터디가 없습니다. tag=" + tag);
+        }
+
+        return studyResponseList;
+    }
+
     public List<StudyResponse> findByName(String name) {
         List<Study> studyList = studyRepository.findByName(name);
         List<StudyResponse> studyResponseList = new ArrayList<>();

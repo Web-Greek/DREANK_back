@@ -17,8 +17,8 @@ public class StudyCreateRequest {
     private int num_recruit;
     private LocalTime start_time;
     private LocalTime end_time;
-    private String day; //월요일, 화요일, 수요일, 목요일, 금요일, 토요일, 일요일
-    private List<Tag> tagList; //스터디 tag 리스트
+    private String day;
+    private String tag; //스터디 tag 리스트
 
     public Study toEntity() {
         return Study.builder()
@@ -28,7 +28,7 @@ public class StudyCreateRequest {
                 .start_time(this.start_time)
                 .end_time(this.end_time)
                 .day(this.day)
-                .tagList(this.tagList)
+                .tag(this.tag)
                 .status(StudyStatus.RECRUIT)
                 .build();
     }

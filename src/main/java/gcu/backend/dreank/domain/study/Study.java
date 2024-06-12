@@ -57,6 +57,8 @@ public class Study extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private StudyStatus status;
 
+    @Column(nullable = false, length = 20)
+    private String tag;
 
     //양방향 매핑
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,9 +66,9 @@ public class Study extends BaseEntity {
     @JsonBackReference
     private User user; //user 객체
 
-    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Tag> tagList = new ArrayList<>();
+    //@OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    //@JsonManagedReference
+    //private List<Tag> tagList = new ArrayList<>();
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<UserStudy> partList = new ArrayList<>();

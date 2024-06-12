@@ -75,6 +75,13 @@ public class StudyController {
         return studyService.findMyStudy(userid);
     }
 
+    //신청한 스터디
+    @GetMapping(value="/search/wating/{userid}")
+    @ResponseBody
+    public HashSet<Study> getWatingStudy(@PathVariable("userid") Long userid) {
+        return studyService.findWatingStudy(userid);
+    }
+
     //스터디 랭킹 조회
     @GetMapping(value = "/search/rank")
     @ResponseBody

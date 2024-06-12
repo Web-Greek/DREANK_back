@@ -72,12 +72,29 @@ public class StudyService {
         return studySet;
     }
 
-    public List<Study> findMakeStudy(Long userId) {
-        User user = userRepository.findById(userId)
+    public List<Study> findMakeStudy(Long userid) {
+        User user = userRepository.findById(userid)
                 .orElseThrow(() -> new IllegalArgumentException("해당하는 사용자가 없습니다."));
 
         // 리더 아이디로 스터디 리스트를 가져옵니다.
-        return studyRepository.findAllByLeader(userId);
+        return studyRepository.findAllByLeader(userid);
+    }
+
+    public HashSet<Study> findWatingStudy(Long userid) {
+        User user = userRepository.findById(userid)
+                .orElseThrow(() -> new IllegalArgumentException("해당하는 사용자가 없습니다."));
+
+        List<UserStudy> userStudyList = userStudyRepository.findByUser(user);
+        HashSet<Study> studySet = new HashSet<>();
+
+        for(UserStudy userStudy : userStudyList) {
+            if (userStudy.getVerify() == Verify.WAITING) {
+                studySet.add(userStudy.getStudy());
+            }
+        }
+
+
+        return studySet;
     }
 
     public List<StudyResponse> findByName(String name) {
